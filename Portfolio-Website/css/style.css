@@ -149,7 +149,7 @@ nav a:hover {
 .profile-name-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 12px;
     flex-wrap: wrap;
     margin-top: 4px;
@@ -163,7 +163,6 @@ nav a:hover {
     gap: 8px;
     flex-wrap: wrap;
     line-height: 1.3;
-    width: 100%;
 }
 
 .username-tag {
@@ -185,8 +184,8 @@ nav a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 12px;
-    margin-bottom: 8px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .badge {
