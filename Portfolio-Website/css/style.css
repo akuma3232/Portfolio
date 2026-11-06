@@ -1,0 +1,758 @@
+/* CSS Variables - Cyan & Magenta Theme */
+:root {
+    --bg-color: #050510;
+    --text-main: #e0e0e0;
+    --text-muted: #a0a0b0;
+    --neon-primary: #00ffff; /* Cyan */
+    --neon-secondary: #ff00ff; /* Magenta */
+    --glass-bg: rgba(25, 25, 40, 0.4);
+    --glass-border: rgba(0, 255, 255, 0.2);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.6;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* --- NEW: Matrix Canvas Background --- */
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Keeps it strictly behind your content */
+    opacity: 0.6; /* Dims it slightly so it doesn't overpower text */
+}
+
+h1, h2, h3 {
+    color: var(--neon-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    margin-bottom: 20px;
+}
+
+h2 { border-bottom: 1px solid var(--neon-primary); padding-bottom: 10px; display: inline-block; }
+p { color: var(--text-muted); margin-bottom: 20px; }
+
+/* Ensure all your actual content stays above the neon glow */
+section, nav, #boot-screen {
+    position: relative;
+    z-index: 1; 
+}
+
+section { padding: 100px 20px 40px; max-width: 1200px; margin: 0 auto; }
+
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Navbar */
+nav {
+    position: fixed;
+    top: 0; width: 100%;
+    background: rgba(5, 5, 16, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 0, 255, 0.2);
+}
+nav a {
+    color: var(--text-main);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+nav a:hover {
+    color: var(--neon-secondary);
+    text-shadow: 0 0 10px var(--neon-secondary);
+}
+
+#hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.profile-avatar {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--neon-primary);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    background: rgba(0,0,0,0.4);
+}
+
+.empty-state {
+    text-align: center;
+}
+
+/* --- BULLETPROOF GRID FIX --- */
+.projects-grid {
+    display: grid;
+    /* Using 45% forces exactly 2 columns on desktop, 1 on mobile */
+    grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.project-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    
+    /* The Flexbox magic to keep buttons aligned */
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    z-index: 1;
+}
+
+/* This forces the text area to absorb extra space, keeping cards equal height */
+.project-card p {
+    flex-grow: 1; 
+    margin-bottom: 25px;
+}
+
+/* Anchors the button securely to the bottom left */
+.project-card .neon-btn {
+    align-self: flex-start;
+    margin-top: auto; 
+}
+
+/* Inner glow effect on hover */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0; height: 0;
+    background: radial-gradient(circle, rgba(255, 0, 255, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: -1;
+}
+
+.project-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(255, 0, 255, 0.2), inset 0 0 15px rgba(0, 255, 255, 0.15);
+    border-color: var(--neon-secondary);
+}
+
+.project-card:hover::before {
+    width: 200%;
+    height: 200%;
+}
+
+.neon-btn {
+    background: transparent;
+    color: var(--neon-secondary);
+    border: 2px solid var(--neon-secondary);
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.neon-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.neon-btn:hover {
+    background: rgba(255, 0, 255, 0.1);
+    color: #fff;
+    box-shadow: 0 0 20px var(--neon-secondary), inset 0 0 10px var(--neon-secondary);
+    text-shadow: 0 0 5px #fff;
+}
+
+.neon-btn:hover::after {
+    left: 200%;
+}
+
+form { display: flex; flex-direction: column; gap: 20px; }
+input, textarea {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 15px;
+    font-family: inherit;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+input:focus, textarea:focus {
+    border-color: var(--neon-primary);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+/* --- TYPEWRITER CURSOR EFFECT --- */
+#typewriter {
+    display: inline-block;
+    min-height: 40px; /* Keeps the container from collapsing before text loads */
+}
+
+#typewriter::after {
+    content: '_';
+    animation: blink 1s step-end infinite;
+    color: var(--neon-secondary); /* Makes the cursor magenta! */
+    margin-left: 5px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* --- CSS TEXT GLITCH EFFECT --- */
+#typewriter {
+    position: relative;
+    /* Runs the glitch animation on a 4-second loop */
+    animation: text-glitch 3s infinite; 
+}
+
+/* The Keyframes: 0% to 90% is normal, the glitch happens instantly between 90% and 96% */
+@keyframes text-glitch {
+    0%, 90%, 100% { 
+        transform: translate(0) skew(0deg); 
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5); 
+        color: var(--neon-primary);
+    }
+    92% { 
+        transform: translate(-4px, 2px) skew(5deg); 
+        text-shadow: -4px 0 var(--neon-secondary), 4px 0 var(--neon-primary); 
+        color: #fff; /* Flashes white briefly */
+    }
+    94% { 
+        transform: translate(4px, -2px) skew(-5deg); 
+        text-shadow: 4px 0 var(--neon-primary), -4px 0 var(--neon-secondary); 
+        color: #fff;
+    }
+    96% { 
+        transform: translate(0) skew(0deg); 
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5); 
+        color: var(--neon-primary);
+    }
+}
+
+/* --- SCROLL REVEAL ANIMATIONS --- */
+.hidden {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Stagger the delay for grid items so they load one after another */
+.projects-grid .hidden:nth-child(1) { transition-delay: 100ms; }
+.projects-grid .hidden:nth-child(2) { transition-delay: 200ms; }
+.projects-grid .hidden:nth-child(3) { transition-delay: 300ms; }
+.projects-grid .hidden:nth-child(4) { transition-delay: 400ms; }
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- CUSTOM CROSSHAIR CURSOR --- */
+/* 1. Hide the default mouse pointer everywhere */
+body, a, button, input, textarea {
+    cursor: none !important; 
+}
+
+/* 2. The Inner Glowing Dot (Cyan) */
+#cursor-dot {
+    position: fixed;
+    top: 0; left: 0;
+    width: 8px; height: 8px;
+    background-color: var(--neon-primary);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; /* Stops the cursor from blocking clicks */
+    z-index: 9999;
+    box-shadow: 0 0 10px var(--neon-primary);
+    transition: width 0.2s, height 0.2s; /* Smooth sizing */
+}
+
+/* 3. The Outer Targeting Ring (Magenta) */
+#cursor-ring {
+    position: fixed;
+    top: 0; left: 0;
+    width: 30px; height: 30px;
+    border: 2px solid var(--neon-secondary);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9998;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5), inset 0 0 10px rgba(255, 0, 255, 0.3);
+    /* The transition creates a slight "lag" effect as it follows the dot */
+    transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+}
+
+/* 4. Crosshair Lines on the Ring */
+#cursor-ring::before, #cursor-ring::after {
+    content: '';
+    position: absolute;
+    background: var(--neon-secondary);
+}
+
+/* Vertical crosshair line */
+#cursor-ring::before {
+    top: -5px; bottom: -5px;
+    left: 50%; width: 2px;
+    transform: translateX(-50%);
+}
+
+/* Horizontal crosshair line */
+#cursor-ring::after {
+    left: -5px; right: -5px;
+    top: 50%; height: 2px;
+    transform: translateY(-50%);
+}
+
+/* --- HOVER EFFECTS (When aiming at a button or link) --- */
+/* We will trigger this class using JavaScript */
+.cursor-active #cursor-dot {
+    width: 0; /* Hide the dot */
+    height: 0;
+}
+
+.cursor-active #cursor-ring {
+    width: 50px; /* Expand the ring */
+    height: 50px;
+    background-color: rgba(0, 255, 255, 0.1); /* Slight cyan fill */
+    border-color: var(--neon-primary); /* Turn ring cyan */
+}
+
+.cursor-active #cursor-ring::before, 
+.cursor-active #cursor-ring::after {
+    background: var(--neon-primary); /* Turn crosshairs cyan */
+}
+
+/* --- CUSTOM NEON SCROLLBAR --- */
+
+/* 1. The overall width of the scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* 2. The track (the background rail the scrollbar sits in) */
+::-webkit-scrollbar-track {
+    background: var(--bg-color); /* Matches your dark background */
+    border-left: 1px solid rgba(0, 255, 255, 0.1); /* Subtle cyan edge */
+}
+
+/* 3. The thumb (the part you actually click and drag) */
+::-webkit-scrollbar-thumb {
+    background: var(--neon-primary); /* Cyan by default */
+    border-radius: 10px;
+    
+    /* We add a border identical to the background to create a "padded" look */
+    border: 3px solid var(--bg-color); 
+}
+
+/* 4. The thumb when hovered or clicked */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-secondary); /* Flashes magenta when grabbed! */
+}
+
+/* 5. Fallback for Firefox (Firefox doesn't support glowing scrollbars yet, but we can color it) */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--neon-primary) var(--bg-color);
+}
+
+/* --- INTERACTIVE TERMINAL STYLES --- */
+#terminal-container {
+    margin-top: 30px;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.6); /* Darker background to separate it */
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    font-family: 'Courier New', Courier, monospace;
+    height: 160px;
+    overflow-y: auto; /* Adds a scrollbar if the text gets too long */
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+}
+
+#terminal-output {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Pushes text to the bottom like a real terminal */
+    margin-bottom: 10px;
+}
+
+.terminal-line {
+    color: var(--neon-primary); /* Cyan for the commands */
+    margin-bottom: 5px;
+    word-wrap: break-word;
+}
+
+.terminal-response {
+    color: var(--text-muted); /* Gray for the computer's response */
+    margin-bottom: 15px;
+    padding-left: 10px;
+    border-left: 2px solid var(--neon-secondary); /* Magenta accent line */
+}
+
+#terminal-input-line {
+    display: flex;
+    align-items: center;
+    color: var(--neon-primary);
+}
+
+.prompt-symbol {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+#terminal-input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    flex-grow: 1;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none; /* Removes the ugly blue focus ring */
+    box-shadow: none; /* Overrides your previous form input styles */
+    padding: 0;
+}
+
+/* --- SYSTEM BOOT PRE-LOADER --- */
+#boot-screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: #020205; /* Deep, pure black */
+    color: var(--neon-primary);
+    font-family: 'Courier New', Courier, monospace;
+    z-index: 999999; /* Highest possible layer so nothing overlaps it */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Text starts at the bottom and pushes up */
+    transition: opacity 0.8s ease; /* Smooth fade out */
+}
+
+.boot-line {
+    margin-bottom: 5px;
+    font-size: 14px;
+    text-shadow: 0 0 5px var(--neon-primary);
+}
+
+/* We will use JavaScript to add this class when the boot is done */
+.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* --- TECH STACK MARQUEE --- */
+.marquee-container {
+    width: 100%;
+    overflow: hidden; /* Hides the text that goes off-screen */
+    background: rgba(0, 255, 255, 0.05);
+    border-top: 1px solid rgba(0, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    padding: 15px 0;
+    margin-top: 20px;
+    white-space: nowrap;
+    position: relative;
+}
+
+/* Add a "fading" effect at the edges so the text doesn't just vanish */
+.marquee-container::before,
+.marquee-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    z-index: 2;
+}
+
+.marquee-container::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-color), transparent);
+}
+
+.marquee-container::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-color), transparent);
+}
+
+.marquee-content {
+    display: inline-flex;
+    gap: 60px; /* Space between the tech names */
+    animation: scroll-marquee 20s linear infinite;
+}
+
+.marquee-content span {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--neon-primary);
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+    letter-spacing: 2px;
+}
+
+/* Hover over the marquee to slow it down (User Interaction) */
+.marquee-container:hover .marquee-content {
+    animation-play-state: paused;
+    color: var(--neon-secondary);
+}
+
+@keyframes scroll-marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.loading-text {
+    grid-column: 1 / -1; /* Makes the loading text span the whole grid */
+    text-align: center;
+    color: var(--neon-primary);
+    padding: 50px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* --- FORM UPLINK STATES --- */
+.transmitting {
+    opacity: 0.6;
+    pointer-events: none;
+    position: relative;
+}
+
+.transmitting::after {
+    content: "...TRANSMITTING...";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--neon-primary);
+    font-weight: bold;
+    letter-spacing: 3px;
+    animation: pulse 1s infinite;
+}
+
+#form-status.success {
+    color: var(--neon-primary);
+    text-shadow: 0 0 5px var(--neon-primary);
+}
+
+#form-status.error {
+    color: var(--neon-secondary);
+    text-shadow: 0 0 5px var(--neon-secondary);
+}
+
+/* --- SOCIAL LINKS BAR --- */
+.social-links-bar {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    border-top: 1px dashed rgba(0, 255, 255, 0.2); /* Subtle dividing line */
+    padding-top: 25px;
+}
+
+.neon-text-link {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 2px;
+    position: relative;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* 1. The Hover Glow */
+.neon-text-link:hover {
+    color: var(--neon-secondary); /* Flashes magenta */
+    text-shadow: 0 0 8px var(--neon-secondary);
+}
+
+/* 2. The Hidden Targeting Brackets */
+.neon-text-link::before,
+.neon-text-link::after {
+    position: absolute;
+    opacity: 0;
+    color: var(--neon-primary); /* Cyan brackets */
+    text-shadow: 0 0 5px var(--neon-primary);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.neon-text-link::before {
+    content: '[';
+    left: 0px;
+}
+
+.neon-text-link::after {
+    content: ']';
+    right: 0px;
+}
+
+/* 3. The Animation: Brackets slide outward and fade in on hover */
+.neon-text-link:hover::before {
+    opacity: 1;
+    left: -15px;
+}
+
+.neon-text-link:hover::after {
+    opacity: 1;
+    right: -15px;
+}
+
+/* --- REACTIVE NEON BACKGROUND --- */
+#neon-glow-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; 
+    
+    /* FIX: Changed to 0 so it sits on top of the black body background */
+    z-index: 0; 
+    
+    /* FIX: Made the color slightly brighter for testing (0.15 opacity) */
+    background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+        rgba(0, 255, 255, 0.15), 
+        transparent 80%
+    );
+    
+    opacity: 0; 
+    transition: opacity 0.5s ease; 
+}
+
+/* Optional: Shift to Magenta when hovering over links (using your existing cursor-active class) */
+body.cursor-active #neon-glow-layer {
+    background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+        rgba(255, 0, 255, 0.15), /* Brighter magenta for testing */
+        transparent 80%
+    );
+}
+
+/* --- HOLOGRAM CHART ANIMATION --- */
+.hologram-chart {
+    animation: hologram-float 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.2));
+}
+
+@keyframes hologram-float {
+    0% {
+        transform: translateY(0px);
+        filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.2));
+    }
+    50% {
+        transform: translateY(-8px); /* Floats up slightly */
+        filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5)); /* Glows brighter */
+    }
+    100% {
+        transform: translateY(0px);
+        filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.2));
+    }
+}
+
+/* =========================================
+   --- RED ALERT EASTER EGG ---
+   ========================================= */
+
+/* 1. Override the CSS Variables when active */
+body.red-alert {
+    --neon-primary: #ff0000; /* Blood Red */
+    --neon-secondary: #ff5500; /* Warning Orange */
+    --glass-border: rgba(255, 0, 0, 0.4);
+    
+    /* Intense red glow on the background */
+    box-shadow: inset 0 0 150px rgba(255, 0, 0, 0.2);
+}
+
+/* 2. Make the whole screen violently shake for a moment */
+body.red-alert-shake {
+    animation: critical-failure 0.4s ease-in-out infinite;
+}
+
+@keyframes critical-failure {
+    0% { transform: translate(2px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(0px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(2px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(2px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+/* 3. Glitch out the terminal specifically */
+body.red-alert #terminal-container {
+    border-color: #ff0000;
+    box-shadow: inset 0 0 20px rgba(255, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.5);
+    animation: text-glitch 0.2s infinite; /* Re-using your glitch animation! */
+}
