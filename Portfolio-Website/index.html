@@ -49,16 +49,31 @@
 
     <!-- Hero Section -->
         <section id="hero">
-            <div class="glass-panel">
-                <div class="profile-header">
+            <div class="profile-card glass-panel">
+                <div class="profile-banner"></div>
+                <div class="profile-main">
                     <img src="assets/profile.gif" alt="Akuma profile avatar" class="profile-avatar">
+                    <div class="profile-meta">
+                        <div class="profile-name-row">
+                            <h2>Akuma <span class="username-tag">💢</span></h2>
+                            <span class="profile-status">ONLINE</span>
+                        </div>
+                        <div class="profile-badges">
+                            <span class="badge badge-cyan">🛡️ Cyber Expert</span>
+                            <span class="badge badge-purple">💻 Software Engineer</span>
+                            <span class="badge badge-pink">🔐 Pentester</span>
+                        </div>
+                        <p class="profile-bio">No debate Detective Conan stands above all 🔥</p>
+                    </div>
                 </div>
-                <!-- Leave the inside of the h1 empty! The JS will fill it. -->
-                <h1 id="typewriter"></h1>
-                <p>🧑‍💻 Software Engineer | Cybersecurity Expert
-                    <br>🔐 Pentester | Ethical Hacker 🛡️
-                    <br>No debate Detective Conan stands above all 🔥</p>
-                
+
+                <div class="profile-roles">
+                    <span class="role-tag">👑 Founder</span>
+                    <span class="role-tag">🧠 Ethical Hacker</span>
+                    <span class="role-tag">⚔️ Security Researcher</span>
+                    <span class="role-tag">🎯 CTF Mindset</span>
+                </div>
+
                 <div id="terminal-container">
                     <div id="terminal-output"></div>
                     <div id="terminal-input-line">
@@ -66,7 +81,6 @@
                         <input type="text" id="terminal-input" autocomplete="off" spellcheck="false">
                     </div>
                 </div>
-                <a href="#projects" class="neon-btn">View_Projects</a>
 
                 <div class="social-links-bar">
                     <a href="https://github.com/akuma3232" target="_blank" class="neon-text-link">GITHUB</a>
@@ -75,6 +89,7 @@
                     <a href="#contact" class="neon-text-link">CONTACT</a>
                 </div>
 
+                <a href="#projects" class="neon-btn profile-btn">View_Projects</a>
             </div>
         </section>
     </section>
