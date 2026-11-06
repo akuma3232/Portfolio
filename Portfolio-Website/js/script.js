@@ -474,10 +474,10 @@ function drawSkillsChart() {
     new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: ['Pentest', 'Ethical Hacking', 'Network Sec', 'Web Sec', 'Linux', 'Python'],
+            labels: ['Linux', 'Web Sec', 'Network Sec', 'Ethical Hacking', 'Pentest', 'Python', 'Linux', 'Web Sec', 'Network Sec', 'Ethical Hacking', 'Pentest', 'Python'],
             datasets: [{
-                label: 'Cyber Skill Index',
-                data: [95, 92, 90, 88, 85, 80], 
+                label: 'Full Spectrum',
+                data: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], 
                 backgroundColor: 'rgba(0, 255, 255, 0.15)', 
                 borderColor: '#00ffff', 
                 borderWidth: 2,

@@ -647,6 +647,60 @@ html {
     pointer-events: none;
 }
 
+.anime-showcase {
+    display: grid;
+    gap: 18px;
+    margin: 30px 0 20px;
+}
+
+.anime-card {
+    border: 1px solid rgba(0, 255, 255, 0.35);
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(0,255,255,0.08), rgba(255,0,255,0.08));
+    padding: 18px 20px;
+    box-shadow: inset 0 0 20px rgba(0,255,255,0.08), 0 0 18px rgba(255,0,255,0.12);
+}
+
+.anime-label {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #ff9dfc;
+    margin-bottom: 8px;
+}
+
+.anime-card h4 {
+    margin: 0;
+    color: var(--neon-primary);
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(0,255,255,0.4);
+}
+
+.anime-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(120px, 1fr));
+    gap: 12px;
+}
+
+.anime-grid span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 62px;
+    padding: 12px 10px;
+    border-radius: 12px;
+    background: rgba(9, 16, 28, 0.85);
+    border: 1px solid rgba(255, 0, 255, 0.22);
+    color: var(--neon-primary);
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    box-shadow: 0 0 18px rgba(0, 255, 255, 0.08);
+}
+
 /* --- TECH STACK MARQUEE --- */
 .marquee-container {
     width: 100%;
